@@ -13,14 +13,17 @@ runs:
 
         echo $PROJECT_PATH
 
-        # ToDo: Add documentation about 'tr' command and describe better this command
+        # Define los path donde estan los archivos que se quiere revisar su style
+        # Primero define el path para los archivos en $PROJECT_PATH/src, luego para los archivos en $PROJECT_PATH/include y finalmente 
+        # para los archivos en $PROJECT_PATH/libs
         SOURCE_FILES=$(find $PROJECT_PATH/src -type f \( -name "*.cpp" -or -name "*.hpp" -or -name "*.h" -or -name "*.c" \) | tr "\n" " ")
         SOURCE_FILES+=$(find $PROJECT_PATH/include -type f \( -name "*.cpp" -or -name "*.hpp" -or -name "*.h" -or -name "*.c" \) | tr "\n" " ")
         SOURCE_FILES+=$(find $PROJECT_PATH/libs -type f \( -name "*.cpp" -or -name "*.hpp" -or -name "*.h" -or -name "*.c" \) | tr "\n" " ")
 
         ERROR_FILE_FLAG=$PROJECT_PATH/clang-format_errors.txt
 
-        # ToDo: Add documentation and describe better this command
+        # clang-format -i $SOURCE_FILES intenta formatear los archivos de SOURCE_FILES
+        # En caso de que ocurra algun error redirige la stdout a clang-format_errors.txt
         CLANG_COMMAND=$(clang-format -i $SOURCE_FILES) > ${ERROR_FILE_FLAG}
 
         echo "Running: clang-format -i $SOURCE_FILES"
