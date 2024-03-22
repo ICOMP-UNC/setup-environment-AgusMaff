@@ -9,11 +9,12 @@ runs:
       run: |
         PROJECT_PATH=$(pwd)
 
-        # ToDo: Add documentation and describe better this command
+        # Este comando ejecuta los tests unitarios en build/tests
+        # Si alguno de los tests no pasa, se imprime por consola detalles sobre la prueba que paso
         ctest --test-dir build/tests --output-on-failure
 
-        # ToDo: Add documentation and describe better this command
-
+        # Este comando ejecuta gcovr para generar un coverage sobre los archivos fuentes del proyecto principal (-r indica ña raiz del proyecto)
+        # Despues se redirige la salida a coverage.txt
         gcovr -r $PROJECT_PATH . > $PROJECT_PATH/coverage.txt
 
         echo "Runnig: gcovr -r $PROJECT_PATH ."
@@ -21,7 +22,7 @@ runs:
         cat $PROJECT_PATH/coverage.txt
 
         # Find the value of correct coverage
-        # ToDo: Add documentation and describe better this command
+        # This command 
         COVERAGE_RESULT=$(grep "TOTAL" $PROJECT_PATH/coverage.txt | awk '{print $NF}' | cut -d '%' -f 1)
 
         # Coverage lines GT 20
