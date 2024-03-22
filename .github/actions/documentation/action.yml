@@ -10,19 +10,22 @@ runs:
           # We only make check, not changes
           DOX_CONF_FILE=$(pwd)/Doxyfile
 
-          # ToDo: Add documentation about this command and describe better
+          # Este comando imprime por stdout el contenido del archivo en Doxyfile definido en $DOX_CONF_FILE
+          # Echo genera una cadena que empieza con INPUT y luego le agrega las direcciones de los directorios src, include y libs
+          # Finalmente redirige las salidas de los comando encerrados por {...} y los escribe en Doxyfile
           {
               cat $DOX_CONF_FILE
-              echo "INPUT" = $(pwd)/src $(pwd)/include $(pwd)/lib
+              echo "INPUT" = $(pwd)/src $(pwd)/include $(pwd)/libs
           } > $DOX_CONF_FILE
 
           # Generate documentation
-          # ToDo: Add documentation about this command and describe better
+          # ToDo: Add documentation and describe better this command 
           sudo dot -c
 
           ERROR_FILE_FLAG=$(pwd)/dox_errors.txt
 
-          # ToDo: Add documentation and describe better this command
+          # Intenta ejecutar doxygen con el archivo en DOX_CONF_FILE
+          # Y redirige la salida al archivo en ERROR_FILE_FLAG
           DOXYGEN_COMMAND=$(doxygen -s $DOX_CONF_FILE) > $ERROR_FILE_FLAG
 
           if [ -s $ERROR_FILE_FLAG ]; then
