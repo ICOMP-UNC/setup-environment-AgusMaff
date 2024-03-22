@@ -1,4 +1,6 @@
 #include <greetings.h>
+#include "../libs/libdyn/include/shared.h"
+#include "../libs/libsta/include/static.h"
 #include <stdio.h>
 
 int main(int argc, char* argv[]){
